@@ -69,14 +69,6 @@ const minimaxCodeFrames = {
       error: { code: -32603, message: MINIMAX_CODE_BUSY_MESSAGE },
     },
   },
-  busyPromptImmediate: {
-    type: "emit_inbound",
-    frame: {
-      kind: "response",
-      method: "session/prompt",
-      error: { code: -32603, message: MINIMAX_CODE_BUSY_MESSAGE },
-    },
-  },
   acceptedPrompt: {
     type: "emit_inbound",
     frame: { kind: "response", method: "session/prompt", result: { stopReason: "end_turn" } },
@@ -250,7 +242,7 @@ describe("minimax-code busy turn lease", () => {
         [
           ...minimaxCodeFrames.open,
           minimaxCodeFrames.promptRequest,
-          minimaxCodeFrames.busyPromptImmediate,
+          minimaxCodeFrames.busyPrompt,
           minimaxCodeFrames.promptRequest,
           minimaxCodeFrames.reSendMarker,
           minimaxCodeFrames.cancelNotification,
